@@ -37,6 +37,8 @@ const initialData = {
         showHourlyOption: true,
         showFixedOption: true,
         showThreePhaseOption: true,
+        description: 'Projeniz için esnek ödeme koşulları sunuyoruz. {optionText} Tüm sabit fiyatlı teklifler %{vatRate} KDV dahil olarak hesaplanmıştır.',
+        intermediateDeliveryText: '*Ara teslim: 2. Sprint sonunda, QR kod özelliklerinin tamamlanıp onaylanmasını takiben.',
     },
     sections: [
         { id: 'introduction', title: 'Giriş', component: 'Introduction', enabled: true },
@@ -47,6 +49,7 @@ const initialData = {
     ],
     scopeDetails: {
         duration: '8 hafta (4 Sprint)',
+        description: 'Teknik dökümanlarda belirtilen ihtiyaçlar doğrusunda, projenin ana hatları aşağıdaki gibidir. Tahmini proje süresi {duration} olarak öngörülmektedir.',
         items: [
             { id: 1, title: 'Arayüz ve Kullanıcı Deneyimi (UI/UX) Geliştirmeleri', tasks: ['Kullanıcı profillerinin Memento tarafından sağlanacak yeni tasarıma göre güncellenmesi.', 'Ödeme ve sepet ekranlarının tasarımsal olarak yenilenmesi.', '"Hatıra Profilim" ekranının yeni tasarıma göre güncellenmesi.', 'Ana sayfaya "Demo Profili" butonu ve "Kullanıcı Yorumları" bölümü eklenmesi.', 'Mevcut web sitesi görsellerinin Memento tarafından iletilecek yenileriyle güncellenmesi.'] },
             { id: 2, title: 'Teknik ve Fonksiyonel Geliştirmeler', tasks: ['Profil QR kod tasarımının (logo, çerçeve vb.) güncellenmesi.', 'QR kod çıktısının fiziksel üretime uygun olacak şekilde JPEG formatından vektörel (DXF/CDR) formata dönüştürülmesi.', 'Sipariş alındığında belirlenen e-posta adresine taslak mail gönderiminin sağlanması.', 'Footer (alt bilgi) bölümündeki sosyal medya bağlantılarının kontrol edilerek WhatsApp ve TikTok ikonlarının eklenmesi.', 'Paket açıklamalarına tahmini fotoğraf/video sayısı bilgilerinin eklenmesi.'] },
@@ -54,6 +57,7 @@ const initialData = {
         ]
     },
     planDetails: {
+        description: 'Proje, Agile metodolojisi ile 2 haftalık Sprint\'ler halinde yönetilecektir. Toplam {sprintCount} Sprint\'ten oluşan bir çalışma planı öngörülmektedir. Her Sprint sonunda bir demo ve değerlendirme toplantısı yapılacaktır.',
         sprints: [
             { id: 1, title: 'Sprint 1 (Hafta 1-2): Analiz, Kurulum ve Temel Arayüz', tasks: ['Mevcut kod yapısının ve altyapının detaylı analizi.', 'Geliştirme ortamlarının kurulması.', 'Yeni kullanıcı profili, ödeme ve sepet ekranlarının temel HTML/CSS yapılarının oluşturulması.', 'Ana sayfa güncellemelerinin (Demo butonu, Yorumlar) taslak olarak yerleştirilmesi.'] },
             { id: 2, title: 'Sprint 2 (Hafta 3-4): Fonksiyonel Geliştirmeler ve QR Kod', tasks: ['QR kod tasarımının güncellenmesi ve DXF/CDR formatında çıktı alınacak altyapının geliştirilmesi.', 'Sipariş sonrası e-posta gönderim fonksiyonunun entegrasyonu.', 'Footer (alt bilgi) bölümündeki linklerin ve ikonların güncellenmesi.'] },
@@ -68,7 +72,8 @@ const initialData = {
             { id: 3, text: 'Proje kapsamı dışındaki ek talepler ayrıca analiz edilerek fiyatlandırılacaktır.'},
             { id: 4, text: 'Projenin sağlıklı ilerlemesi için gerekli tasarım dosyaları, içerikler ve mevcut sisteme erişim bilgilerinin Memento tarafından zamanında sağlanması beklenmektedir.'},
             { id: 5, text: 'Teknik İnceleme ve Teklif Revizyonu: Bu teklif, sağlanan dökümanlara dayanmaktadır. Sözleşme sonrası mevcut kod tabanı, veritabanı yapısı ve API\'ların detaylı incelenmesinin ardından, öngörülemeyen teknik zorlukların tespiti halinde teklif revize edilebilir. Olası bir revizyon, karşılıklı mutabakat ile yapılacaktır.'},
-            { id: 6, text: 'Ücretsiz Fesih Hakkı: Sözleşmenin imzalanmasını takiben 3 (üç) iş günü içerisinde herhangi bir gerekçe göstermeksizin ve cezai şart olmaksızın projeyi feshetme hakkı bulunmaktadır.'}
+            { id: 6, text: 'Ücretsiz Fesih Hakkı: Sözleşmenin imzalanmasını takiben 3 (üç) iş günü içerisinde herhangi bir gerekçe göstermeksizin ve cezai şart olmaksızın projeyi feshetme hakkı bulunmaktadır.'},
+            { id: 7, text: 'Teklifte belirtilen tüm ücretler ABD Doları (USD) cinsindendir. Müşterinin Türk Lirası (TRY) ile ödeme yapmayı tercih etmesi durumunda, fatura tutarı, faturanın düzenlendiği tarihteki Türkiye Cumhuriyet Merkez Bankası (TCMB) Döviz Satış Kuru baz alınarak hesaplanacaktır.'},
         ]
     }
 };
@@ -235,6 +240,8 @@ function Controls({ data, updateData, moveItemInArray, setData }) {
 
                 <ControlSection title="Firma ve Müşteri Bilgileri">
                     <InputField label="Firma Adı" value={data.company.name} onChange={e => updateData('company.name', e.target.value)} />
+                    <InputField label="Firma E-posta" value={data.company.email} onChange={e => updateData('company.email', e.target.value)} />
+                    <InputField label="Firma Telefon" value={data.company.phone} onChange={e => updateData('company.phone', e.target.value)} />
                     <InputField label="Müşteri Adı" value={data.client.name} onChange={e => updateData('client.name', e.target.value)} />
                     <InputField label="Müşteri Firma" value={data.client.company} onChange={e => updateData('client.company', e.target.value)} />
                 </ControlSection>
@@ -261,6 +268,22 @@ function Controls({ data, updateData, moveItemInArray, setData }) {
                     <InputField type="number" label="Tahmini Saat" value={data.pricing.estimatedHours} onChange={e => updateData('pricing.estimatedHours', parseInt(e.target.value) || 0)} />
                     <InputField type="number" label="Sabit Fiyat ($)" value={data.pricing.fixedPrice} onChange={e => updateData('pricing.fixedPrice', parseFloat(e.target.value) || 0)} />
                     <InputField type="number" label="KDV Oranı (%)" value={data.pricing.vatRate} onChange={e => updateData('pricing.vatRate', parseFloat(e.target.value) || 0)} />
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                        <p className="text-xs text-gray-500 mb-2">Dinamik alanlar: {`{optionText}`}, {`{vatRate}`}</p>
+                        <TextAreaField 
+                            label="Fiyatlandırma Açıklama Metni" 
+                            value={data.pricing.description} 
+                            onChange={e => updateData('pricing.description', e.target.value)} 
+                            rows={3} 
+                        />
+                        <div className="mt-3 space-y-3">
+                            <InputField 
+                                label="Ara Teslim Açıklama Metni" 
+                                value={data.pricing.intermediateDeliveryText} 
+                                onChange={e => updateData('pricing.intermediateDeliveryText', e.target.value)} 
+                            />
+                        </div>
+                    </div>
                 </ControlSection>
 
                 <ControlSection title="Giriş Metni">
@@ -271,6 +294,21 @@ function Controls({ data, updateData, moveItemInArray, setData }) {
                 <ControlSection title="Bölüm Sıralaması">
                     <p className="text-sm text-gray-500 mb-2">Bölümleri okları kullanarak yeniden sıralayabilirsiniz.</p>
                     <ReorderableList items={data.sections} onMove={(from, to) => moveItemInArray('sections', from, to)} renderItem={item => <span className="font-semibold">{item.title}</span>} />
+                </ControlSection>
+
+                <ControlSection title="Proje Kapsamı Açıklaması">
+                    <p className="text-xs text-gray-500 mb-2">Dinamik alan: {`{duration}`} - proje süresi ile otomatik değiştirilir</p>
+                    <TextAreaField 
+                        label="Kapsam Açıklama Metni" 
+                        value={data.scopeDetails.description} 
+                        onChange={e => updateData('scopeDetails.description', e.target.value)} 
+                        rows={3} 
+                    />
+                    <InputField 
+                        label="Proje Süresi" 
+                        value={data.scopeDetails.duration} 
+                        onChange={e => updateData('scopeDetails.duration', e.target.value)} 
+                    />
                 </ControlSection>
                 
                 <EditableSection
@@ -294,6 +332,16 @@ function Controls({ data, updateData, moveItemInArray, setData }) {
                         />
                     )}
                 />
+
+                <ControlSection title="Proje Planı Açıklaması">
+                    <p className="text-xs text-gray-500 mb-2">Dinamik alan: {`{sprintCount}`} - sprint sayısı ile otomatik değiştirilir</p>
+                    <TextAreaField 
+                        label="Plan Açıklama Metni" 
+                        value={data.planDetails.description} 
+                        onChange={e => updateData('planDetails.description', e.target.value)} 
+                        rows={3} 
+                    />
+                </ControlSection>
 
                 <EditableSection
                     title="Proje Planı Detayları"
@@ -532,9 +580,13 @@ const IntroductionSection = ({ data, title }) => {
     return <SectionWrapper title={title}>{processedText}</SectionWrapper>;
 };
 
-const ScopeSection = ({ data, index, title }) => (
+const ScopeSection = ({ data, index, title }) => {
+    const processedDescription = data.scopeDetails.description
+        .replace(/{duration}/g, data.scopeDetails.duration);
+    
+    return (
     <SectionWrapper title={`${index}. ${title}`}>
-        <p className="mb-6">Teknik dökümanlarda belirtilen ihtiyaçlar doğrultusunda, projenin ana hatları aşağıdaki gibidir. Tahmini proje süresi <strong>{data.scopeDetails.duration}</strong> olarak öngörülmektedir.</p>
+        <p className="mb-6" dangerouslySetInnerHTML={{ __html: processedDescription.replace(/\{duration\}/g, `<strong>${data.scopeDetails.duration}</strong>`) }}></p>
         <div className="space-y-4">
             {data.scopeDetails.items.map((item, idx) => (
                 <details key={item.id} className="bg-gray-50 p-4 rounded-lg cursor-pointer hover:bg-gray-100 no-break-inside" open>
@@ -546,7 +598,8 @@ const ScopeSection = ({ data, index, title }) => (
             ))}
         </div>
     </SectionWrapper>
-);
+    );
+};
 
 const PricingSection = ({ data, index, title }) => {
     const { hourlyRate, estimatedHours, fixedPrice, vatRate, showHourlyOption, showFixedOption, showThreePhaseOption } = data.pricing;
@@ -573,9 +626,14 @@ const PricingSection = ({ data, index, title }) => {
         );
     }
 
+    const optionText = visibleOptions > 1 ? `Aşağıdaki ${visibleOptions} farklı modelden birini tercih edebilirsiniz.` : 'Aşağıdaki ödeme koşullarını sunuyoruz.';
+    const processedDescription = data.pricing.description
+        .replace(/{optionText}/g, optionText)
+        .replace(/{vatRate}/g, vatRate);
+
     return (
         <SectionWrapper title={`${index}. ${title}`}>
-            <p className="mb-6">Projeniz için esnek ödeme koşulları sunuyoruz. {visibleOptions > 1 ? `Aşağıdaki ${visibleOptions} farklı modelden birini tercih edebilirsiniz.` : 'Aşağıdaki ödeme koşullarını sunuyoruz.'} Tüm sabit fiyatlı teklifler %{vatRate} KDV dahil olarak hesaplanmıştır.</p>
+            <p className="mb-6">{processedDescription}</p>
             <div className={`grid grid-cols-1 ${gridColsClass} print:${gridColsClass} gap-6`}>
                 {showHourlyOption && (
                     <div className={`border-2 rounded-lg p-6 flex flex-col no-break-inside ${recommendedOption === 'hourly' ? 'border-blue-500 shadow-lg' : 'border-gray-200'}`}>
@@ -617,14 +675,18 @@ const PricingSection = ({ data, index, title }) => {
                     </div>
                 )}
             </div>
-            {showThreePhaseOption && <p className="text-xs text-gray-500 mt-4">*Ara teslim: 2. Sprint sonunda, QR kod özelliklerinin tamamlanıp onaylanmasını takiben.</p>}
+            {showThreePhaseOption && <p className="text-xs text-gray-500 mt-4">{data.pricing.intermediateDeliveryText}</p>}
         </SectionWrapper>
     );
 };
 
-const PlanSection = ({ data, index, title }) => (
+const PlanSection = ({ data, index, title }) => {
+    const processedDescription = data.planDetails.description
+        .replace(/{sprintCount}/g, data.planDetails.sprints.length);
+    
+    return (
     <SectionWrapper title={`${index}. ${title}`}>
-        <p className="mb-6">Proje, Agile metodolojisi ile 2 haftalık Sprint'ler halinde yönetilecektir. Toplam {data.planDetails.sprints.length} Sprint'ten oluşan bir çalışma planı öngörülmektedir. Her Sprint sonunda bir demo ve değerlendirme toplantısı yapılacaktır.</p>
+        <p className="mb-6">{processedDescription}</p>
         <div className="space-y-4">
             {data.planDetails.sprints.map((sprint, idx) => (
                 <div key={sprint.id} className="p-4 border rounded-lg no-break-inside">
@@ -636,7 +698,8 @@ const PlanSection = ({ data, index, title }) => (
             ))}
         </div>
     </SectionWrapper>
-);
+    );
+};
 
 const TermsSection = ({ data, index, title }) => (
     <SectionWrapper title={`${index}. ${title}`}>
