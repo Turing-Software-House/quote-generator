@@ -16,16 +16,16 @@ const initialData = {
     company: {
         name: 'Turing Software House',
         slogan: 'Yazılımda İnovatif Çözüm Ortağınız',
-        email: 'info@turingsoftware.house',
-        phone: '+90 555 123 45 67',
+        email: 'turingsoftwarehouse@gmail.com',
+        phone: '+90 553 130 95 98',
     },
     client: {
         name: 'Memento Yetkilisine',
         company: 'memento-qr.com',
     },
     proposal: {
-        number: 'TSH-2025-08-04',
-        date: '9 Ağustos 2025',
+        number: 'TSH-2025-08-10',
+        date: '10 Ağustos 2025',
         validity: 30,
     },
     introductionText: 'Değerli {clientName} Ekibi,\n\n{clientCompany} web platformunuzun geliştirilmesi ve iyileştirilmesi projesi için tarafımıza ilettiğiniz teknik dökümanları detaylıca incelemiş bulunmaktayız. Platformunuzun misyonunu ve hedeflerini anlıyor, bu değerli projede sizlere çözüm ortağı olmaktan heyecan duyuyoruz. {companyName} olarak, projenizin gereksinimlerini karşılayacak teknik uzmanlığa ve deneyime sahip olduğumuzu belirterek hazırladığımız proje teklifini bilgilerinize sunarız.',
