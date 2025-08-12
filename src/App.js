@@ -69,7 +69,7 @@ const initialData = {
         items: [
             { id: 1, text: 'Bu teklif, tebliğ tarihinden itibaren 30 gün süreyle geçerlidir.'},
             { id: 2, text: 'Sabit fiyatlı tekliflerde belirtilen fiyatlara %20 KDV dahildir. Saatlik ücretlendirmede KDV ayrıca eklenecektir.'},
-            { id: 3, text: 'Proje kapsamı dışındaki ek talepler ayrıca analiz edilerek fiyatlandırılacaktır.'},
+            { id: 3, text: 'Proje kapsamı dışındaki ek talepler ayrıca analiz edilerek ücretlendirilecektir.'},
             { id: 4, text: 'Projenin sağlıklı ilerlemesi için gerekli tasarım dosyaları, içerikler ve mevcut sisteme erişim bilgilerinin Memento tarafından zamanında sağlanması beklenmektedir.'},
             { id: 5, text: 'Teknik İnceleme ve Teklif Revizyonu: Bu teklif, sağlanan dökümanlara dayanmaktadır. Sözleşme sonrası mevcut kod tabanı, veritabanı yapısı ve API\'ların detaylı incelenmesinin ardından, öngörülemeyen teknik zorlukların tespiti halinde teklif revize edilebilir. Olası bir revizyon, karşılıklı mutabakat ile yapılacaktır.'},
             { id: 6, text: 'Ücretsiz Fesih Hakkı: Sözleşmenin imzalanmasını takiben 3 (üç) iş günü içerisinde herhangi bir gerekçe göstermeksizin ve cezai şart olmaksızın projeyi feshetme hakkı bulunmaktadır.'},
@@ -554,7 +554,6 @@ function Preview({ data }) {
                 {/* Footer */}
                 <footer className="mt-16 pt-8 border-t-2 border-gray-200 text-center">
                     <p className="text-lg font-semibold">Projenizde çözüm ortağınız olmayı dileriz.</p>
-                    <p className="text-gray-600 mt-2">Saygılarımızla,</p>
                     <p style={{color: data.themeColor}} className="text-2xl font-bold mt-4">{data.company.name}</p>
                 </footer>
             </div>
@@ -639,7 +638,7 @@ const PricingSection = ({ data, index, title }) => {
                     <div className={`border-2 rounded-lg p-6 flex flex-col no-break-inside ${recommendedOption === 'hourly' ? 'border-blue-500 shadow-lg' : 'border-gray-200'}`}>
                         {recommendedOption === 'hourly' && <span style={{backgroundColor: 'var(--theme-color)'}} className="text-white text-xs font-bold px-3 py-1 rounded-full self-start mb-3">Önerilen</span>}
                         <h3 style={{color: 'var(--theme-color)'}} className="text-xl font-bold mb-2">Seçenek: Saatlik Ödeme</h3>
-                        <p className="text-gray-600 mb-4 flex-grow">Proje boyunca çalışılan toplam saat üzerinden faturalandırma yapılır.</p>
+                        <p className="text-gray-600 mb-4 flex-grow">Her Sprint sonunda yapılacak demo ve değerlendirme toplantısı ile birlikte o Sprint’e ait toplam saatler faturalandırılır.</p>
                         <div className="text-center bg-gray-100 p-4 rounded-lg">
                             <p className="text-3xl font-bold">{formatCurrency(hourlyRate)} <span className="text-lg font-normal">/ saat + KDV</span></p>
                             <p className="text-sm text-gray-500 mt-1">Tahmini Proje Süresi: ~{estimatedHours} Saat</p>
